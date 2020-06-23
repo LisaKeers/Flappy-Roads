@@ -29,13 +29,25 @@ var Car = (function () {
 }());
 var Game = (function () {
     function Game() {
+        this.car = [];
         this.div = document.createElement("level");
         document.body.appendChild(this.div);
+        for (var i = 0; i < 7; i++) {
+            this.car.push(new Car());
+        }
         this.player = new Player();
         this.gameLoop();
     }
     Game.prototype.gameLoop = function () {
         this.player.update();
+        for (var _i = 0, _a = this.car; _i < _a.length; _i++) {
+            var car = _a[_i];
+            car.update();
+            if (this.checkCollision(car.getRectangle(), this.player.getRectangle())) {
+                this.player.x = 400;
+                this.player.y = 670;
+            }
+        }
         requestAnimationFrame(this.gameLoop.bind(this));
     };
     Game.prototype.update = function () {

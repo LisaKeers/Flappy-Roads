@@ -1,8 +1,8 @@
 class Player {
 
     private div: HTMLElement    
-    private x:number
-    private y:number
+    public x:number
+    public y:number
 
     constructor() {
         this.div = document.createElement("player")
